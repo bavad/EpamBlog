@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/master.css")
+    @Scripts.Render("~/bundles/modernizr")    
+</head>
+<body>
+    <header class="header">
+        <div>
+            <a id="logo"  href="#"><img src="~/Content/logo1.png"></a>
+        </div>        
+    </header>
+    
+    @RenderBody()
+    <footer class="footer">
+        <div class="fitems">
+            &copy; Vadym Baidak
+        </div>
+        <div class="fitems">
+            <a id="ttp" onclick="window.scrollTo(0, 0);">To the top</a>
+        </div>
+    </footer>    
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

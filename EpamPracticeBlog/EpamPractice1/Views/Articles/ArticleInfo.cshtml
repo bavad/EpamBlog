@@ -1,0 +1,65 @@
+﻿@model EpamPractice1.Models.ArticleTagViewModel
+
+@{
+    ViewBag.Title = "Article";
+    @Styles.Render("~/Content/mainPage.css")
+}
+<main class="row">
+    <section class="col-md-8">
+        <h2>Article</h2>
+
+        <div align="justify">
+            
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Article.Name)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Article.Name)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Article.Date)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Article.Date)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Article.Body)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Article.Body)
+                </dd>
+
+                <dt>
+                    Tags
+                </dt>
+
+                <dd>
+                    @{int lastTagId = Model.Tags.Last().TagID;} 
+                    @foreach (var t in Model.Tags)
+                    {
+                        <text>@t.Name</text>
+                        if (t.TagID != lastTagId)
+                        {
+                            <text>, </text>
+                        }                    
+                    }             
+                 </dd>
+
+            </dl>
+        </div>        
+    </section>
+    <section class="col-md-4">
+        <ul class="main-menu">
+            <li>@Html.ActionLink("Главная", "Index", "Articles")</li>
+            <li>@Html.ActionLink("Гостевая", "Index", "Reviews")</li>
+            <li>@Html.ActionLink("Анкета", "Index", "Forms")</li>
+        </ul>
+        @Html.ActionLink("Выйти из аккаунта", "Logout", "Account")
+    </section>
+</main>

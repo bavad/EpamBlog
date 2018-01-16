@@ -1,0 +1,57 @@
+﻿@model IEnumerable<EpamPractice1.DAL.Entities.Tag>
+
+@{
+    ViewBag.Title = "Add Article";
+    @Styles.Render("~/Content/mainPage.css")    
+}
+
+<main class="row">
+    <section class="col-md-8">
+        
+        @using (Html.BeginForm())
+        {
+
+            <div class="form-horizontal">
+                <h4>Add Article</h4>
+                <div class="form-group">
+                    @Html.Label("name", "Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.Editor("name", new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("body", "Body", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextArea("body", string.Empty, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div> 
+                @Html.Label("tags", "Tags", htmlAttributes: new { @class = "control-label col-md-2" })
+                <select id="tags" multiple="multiple" name="tags">
+                    @foreach (var item in Model)
+                    {
+                        <option value="@item.TagID">@item.Name</option>
+                    }
+                </select>
+           
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Send form" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+    </section>
+    <section class="col-md-4">
+        <ul class="main-menu">
+            <li>@Html.ActionLink("Главная", "Index", new { area = "", controller = "Articles" })</li>
+            <li>@Html.ActionLink("Гостевая", "Index", new { area = "", controller = "Reviews" })</li>
+            <li>@Html.ActionLink("Анкета", "Index", new { area = "", controller = "Forms" })</li>
+        </ul>
+        @Html.ActionLink("Выйти из аккаунта", "Logout", new { area = "", controller = "Account" })
+    </section>
+</main>
+
+
+

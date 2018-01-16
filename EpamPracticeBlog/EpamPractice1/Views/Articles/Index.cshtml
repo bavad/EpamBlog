@@ -1,0 +1,88 @@
+﻿@model IEnumerable<EpamPractice1.DAL.Entities.Article>
+
+@{
+    ViewBag.Title = "Main Page";
+    @Styles.Render("~/Content/mainPage.css")
+}
+
+
+<main class="row">
+    <section class="col-md-8">
+        <h2>Articles</h2>        
+        <table class="table">           
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Date)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Rating)
+                    </th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Rating)
+                    </td>                                         
+                    <td>
+                        @Html.ActionLink("Подробнее", "ArticleInfo", new { id = item.ArticleID })
+                    </td>                    
+                </tr>
+                <tr>
+                    <td colspan="4" align="justify">
+                        @Html.DisplayFor(modelItem => item.BodyPreview)
+                    </td>
+                </tr>
+
+            }
+
+        </table>
+    </section>
+    <section class="col-md-4">
+        <ul class="main-menu">
+            <li><a href="#">Главная</a></li>
+            <li>@Html.ActionLink("Гостевая", "Index", "Reviews")</li>
+            <li>@Html.ActionLink("Анкета", "Index", "Forms")</li>
+        </ul>
+        <br />
+        <div class="vote">
+        @using (Html.BeginForm())
+        {
+            <div class="form-horizontal">                            
+                <div class="form-group">
+                    Выберите лучшую статью:<br />
+                    @foreach (var item in Model)
+                    {
+                        <label for="@item.Name">@item.Name</label>
+                        <input type="radio" name="articleId" id="@item.Name" value="@item.ArticleID"><br>
+                    }                    
+                </div>              
+
+                <div class="form-group">
+                    <div>
+                        <input type="submit" value="Проголосовать" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+        </div>
+        @if (ViewBag.Admin)
+        {
+           @Html.ActionLink("Администрирование", "Index", new { area = "Admin", controller = "Admin"})
+        }
+        <br />
+        @Html.ActionLink("Выйти из аккаунта", "Logout", "Account")
+    </section>
+</main>
+
