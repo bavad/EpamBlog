@@ -15,7 +15,8 @@ namespace EpamPractice1.Controllers
 {    
     public class AccountController : Controller
     {
-        private ApplicationUserManager UserManager
+        //test
+		private ApplicationUserManager UserManager
         {
             get
             {
